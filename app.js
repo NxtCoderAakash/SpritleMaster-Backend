@@ -1,10 +1,14 @@
 let express = require("express");
-let app = express();
-app.use(express.json());
+
 let bcrypt = require("bcrypt");
 let path = require("path");
 let { open } = require("sqlite");
 let sqlite3 = require("sqlite3");
+
+let app = express();
+const cors = require("cors");
+app.use(express.json());
+app.use(cors());
 
 let dbPath = path.join(__dirname, "studentMaster.db");
 let db = null;
