@@ -1,0 +1,51 @@
+
+###API 1
+POST http://localhost:3005/register
+Content-Type: application/json
+
+{
+  "name": "Aakash",
+  "email": "aa@gmail.com",
+  "password": "saibaba",
+  "mobile": "9015844910",
+  "isStudent": "false"
+}
+
+
+
+###API 2 
+POST http://localhost:3005/login
+Content-Type: application/json
+
+{
+  "email": "aa@gmail.com",
+  "password": "saibaba"
+}
+
+
+### API 3
+PUT http://localhost:3005/change-password
+Content-Type: application/json
+
+{
+  "email": "adam_richard",
+  "oldPassword": "richard_567",
+  "newPassword": "richard@123"
+}
+
+
+####
+
+
+###API 4 
+
+GET http://localhost:3005/aa@gmail.com/
+
+
+
+
+###API 5 
+
+GET http://localhost:3005/allusers
+
+
