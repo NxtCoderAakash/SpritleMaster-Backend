@@ -205,25 +205,6 @@ app.get("/alloperations", async (request, response) => {
   }
 });
 
-//API 8
-
-app.get("/alloperation/:email", async (request, response) => {
-  try {
-    const getUserQuery = `
-    SELECT 
-        * 
-    FROM 
-        operations 
-    `;
-
-    let alloperations = await db.all(getUserQuery);
-    response.send(alloperations);
-  } catch (e) {
-    console.log(`The Error is : ${e.message}`);
-    process.exit(1);
-  }
-});
-
 //API 9
 
 app.get("/operations/:email/", async (request, response) => {
