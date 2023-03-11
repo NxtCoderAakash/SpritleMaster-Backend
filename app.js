@@ -9,7 +9,7 @@ let app = express();
 const cors = require("cors");
 app.use(
   cors({
-    origin: "https://master--quiet-tartufo-53b672.netlify.app/",
+    origin: "https://master--quiet-tartufo-53b672.netlify.app",
   })
 );
 app.use(express.json());
