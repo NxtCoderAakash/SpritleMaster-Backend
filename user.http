@@ -35,11 +35,14 @@ Content-Type: application/json
 
 
 ####
+#####
+
+GET http://localhost:3005/allopera
 
 
 ###API 4 
 
-GET http://localhost:3005/aa@gmail.com/
+GET http://localhost:3005/aa@gmail.com
 
 
 
@@ -51,9 +54,7 @@ GET http://localhost:3005/allusers
 
 
 
-#####
 
-GET http://localhost:3005/alloperations
 
 
 
