@@ -239,7 +239,7 @@ app.get("/operations/:email/", async (request, response) => {
         email='${email}';
     `;
 
-    let userDetails = await db.get(getUserQuery);
+    let userDetails = await db.all(getUserQuery);
     if (userDetails) {
       response.send(userDetails);
     }
