@@ -4,11 +4,11 @@ POST http://localhost:3005/register
 Content-Type: application/json
 
 {
-  "name": "Aakash",
-  "email": "aa@gmail.com",
+  "name": "vikas",
+  "email": "vikas@gmail.com",
   "password": "saibaba",
   "mobile": "9015844910",
-  "isStudent": "false"
+  "isStudent": "true"
 }
 
 

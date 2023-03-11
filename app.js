@@ -136,9 +136,28 @@ app.get("/allusers", async (request, response) => {
   }
 });
 
+//API 7
+
+app.get("/allopera", async (request, response) => {
+  try {
+    const getUserQuery = `
+    SELECT 
+        * 
+    FROM 
+        operations 
+    `;
+
+    let alloperations = await db.all(getUserQuery);
+    response.send(alloperations);
+  } catch (e) {
+    console.log(`The Error is : ${e.message}`);
+    process.exit(1);
+  }
+});
+
 // API 4
 
-app.get("/:email/", async (request, response) => {
+app.get("/:email", async (request, response) => {
   try {
     let { email } = request.params;
 
@@ -190,25 +209,6 @@ app.post("/updateoperations", async (request, response) => {
   }
 });
 
-//API 7
-
-app.get("/alloperations", async (request, response) => {
-  try {
-    const getUserQuery = `
-    SELECT 
-        * 
-    FROM 
-        operations 
-    `;
-
-    let alloperations = await db.all(getUserQuery);
-    response.send(alloperations);
-  } catch (e) {
-    console.log(`The Error is : ${e.message}`);
-    process.exit(1);
-  }
-});
-
 //API 9
 
 app.get("/operations/:email/", async (request, response) => {
@@ -228,7 +228,7 @@ app.get("/operations/:email/", async (request, response) => {
     if (userDetails) {
       response.send(userDetails);
     } else {
-      response.send("No Such User Exists");
+      response.send("No Such operations by the given User Exists");
     }
   } catch (e) {
     console.log(`The Error is : ${e.message}`);
