@@ -117,56 +117,6 @@ app.post("/login", async (request, response) => {
   }
 });
 
-//API 3
-
-app.put("/change-password", async (request, response) => {
-  try {
-    let { email, oldPassword, newPassword } = request.body;
-    let getUserDetailsQuery = `
-    SELECT 
-        * 
-    FROM 
-        studentMaster 
-    WHERE 
-        email='${email}';`;
-
-    let dbDetail = await db.get(getUserDetailsQuery);
-
-    let isPasswordCorrect = await bcrypt.compare(
-      oldPassword,
-      dbDetail.password
-    );
-
-    if (isPasswordCorrect) {
-      if (newPassword.length < 5) {
-        response.status(400);
-        response.send("Password is too short");
-      } else {
-        let hashedPassword = await bcrypt.hash(newPassword, 10);
-        let updatePasswordQuery = `
-                UPDATE  
-                    user 
-                SET 
-                    password="${hashedPassword}" 
-                WHERE 
-                    username='${username}';
-                `;
-        await db.run(updatePasswordQuery);
-        response.status(200);
-        response.send("Password updated");
-      }
-    } else {
-      response.status(400);
-      response.send("Invalid current password");
-    }
-  } catch (e) {
-    console.log(`The Error is : ${e.message}`);
-    process.exit(1);
-  }
-});
-
-module.exports = app;
-
 //API 5
 
 app.get("/allusers", async (request, response) => {
@@ -188,16 +138,104 @@ app.get("/allusers", async (request, response) => {
 
 //API 4
 
-app.get("/:email/", async (request, response) => {
+// app.get("/:email/", async (request, response) => {
+//   try {
+//     let { email } = request.params;
+
+//     let getUserQuery = `
+//     SELECT
+//         *
+//     FROM
+//         studentMaster
+//     WHERE
+//         email='${email}';
+//     `;
+
+//     let userDetails = await db.get(getUserQuery);
+//     if (userDetails) {
+//       response.send(userDetails);
+//     }
+//     response.send("No Such User Exists");
+//     response.send(userDetails);
+//   } catch (e) {
+//     console.log(`The Error is : ${e.message}`);
+//     process.exit(1);
+//   }
+// });
+
+//API 6 operation
+
+app.post("/updateoperations", async (request, response) => {
+  try {
+    let { email, operation } = request.body;
+    let createUserQuery = `
+                INSERT INTO 
+                    operations(email,operation) 
+                     
+                VALUES (
+                    "${email}","${operation}"
+                );
+                `;
+
+    await db.run(createUserQuery);
+    response.status(200);
+    response.send("Operation created successfully");
+  } catch (e) {
+    console.log(`The Error is : ${e.message}`);
+    process.exit(1);
+  }
+});
+
+//API 7
+
+app.get("/alloperations", async (request, response) => {
+  try {
+    const getUserQuery = `
+    SELECT 
+        * 
+    FROM 
+        operations 
+    `;
+
+    let alloperations = await db.all(getUserQuery);
+    response.send(alloperations);
+  } catch (e) {
+    console.log(`The Error is : ${e.message}`);
+    process.exit(1);
+  }
+});
+
+//API 8
+
+app.get("/alloperation/:email", async (request, response) => {
+  try {
+    const getUserQuery = `
+    SELECT 
+        * 
+    FROM 
+        operations 
+    `;
+
+    let alloperations = await db.all(getUserQuery);
+    response.send(alloperations);
+  } catch (e) {
+    console.log(`The Error is : ${e.message}`);
+    process.exit(1);
+  }
+});
+
+//API 9
+
+app.get("/operations/:email/", async (request, response) => {
   try {
     let { email } = request.params;
 
     let getUserQuery = `
-    SELECT 
-        * 
-    FROM 
-        studentMaster 
-    WHERE 
+    SELECT
+        *
+    FROM
+        operations
+    WHERE
         email='${email}';
     `;
 
@@ -212,3 +250,5 @@ app.get("/:email/", async (request, response) => {
     process.exit(1);
   }
 });
+
+module.exports = app;

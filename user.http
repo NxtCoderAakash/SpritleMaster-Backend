@@ -49,3 +49,27 @@ GET http://localhost:3005/aa@gmail.com/
 GET http://localhost:3005/allusers
 
 
+
+
+#####
+
+GET http://localhost:3005/alloperations
+
+
+
+####
+POST http://localhost:3005/updateoperations
+Content-Type: application/json
+
+{
+  "email": "aa@gmail.com",
+  "operation":"2+3"
+}
+
+#####
+
+GET http://localhost:3005/operations/aa@gmail.com/
+
+
+###
+
