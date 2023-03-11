@@ -223,9 +223,9 @@ app.get("/operations/:email/", async (request, response) => {
     let userDetails = await db.all(getUserQuery);
     if (userDetails) {
       response.send(userDetails);
+    } else {
+      response.send("No Such User Exists");
     }
-    response.send("No Such User Exists");
-    response.send(userDetails);
   } catch (e) {
     console.log(`The Error is : ${e.message}`);
     process.exit(1);
