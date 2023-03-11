@@ -136,32 +136,36 @@ app.get("/allusers", async (request, response) => {
   }
 });
 
-//API 4
+// API 4
 
-// app.get("/:email/", async (request, response) => {
-//   try {
-//     let { email } = request.params;
+app.get("/:email/", async (request, response) => {
+  try {
+    let { email } = request.params;
 
-//     let getUserQuery = `
-//     SELECT
-//         *
-//     FROM
-//         studentMaster
-//     WHERE
-//         email='${email}';
-//     `;
+    let getUserQuery = `
+    SELECT
+        *
+    FROM
+        studentMaster
+    WHERE
+        email='${email}';
+    `;
 
-//     let userDetails = await db.get(getUserQuery);
-//     if (userDetails) {
-//       response.send(userDetails);
-//     }
-//     response.send("No Such User Exists");
-//     response.send(userDetails);
-//   } catch (e) {
-//     console.log(`The Error is : ${e.message}`);
-//     process.exit(1);
-//   }
-// });
+    let userDetails = await db.get(getUserQuery);
+    if (userDetails) {
+      response.send({
+        email: userDetails.email,
+        name: userDetails.name,
+        isStudent: userDetails.isStudent,
+      });
+    } else {
+      response.send("No Such User Exists");
+    }
+  } catch (e) {
+    console.log(`The Error is : ${e.message}`);
+    process.exit(1);
+  }
+});
 
 //API 6 operation
 
