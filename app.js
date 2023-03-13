@@ -9,7 +9,7 @@ let app = express();
 const cors = require("cors");
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://quiet-tartufo-53b672.netlify.app",
   })
 );
 app.use(express.json());
