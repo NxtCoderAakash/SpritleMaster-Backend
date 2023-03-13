@@ -178,7 +178,7 @@ app.get("/:email", async (request, response) => {
         isStudent: userDetails.isStudent,
       });
     } else {
-      response.send("No Such User Exists");
+      response.json({ err: "No Such User Exists" });
     }
   } catch (e) {
     console.log(`The Error is : ${e.message}`);
