@@ -100,7 +100,7 @@ app.post("/login", async (request, response) => {
 
     if (dbUser === undefined) {
       response.status(400);
-      response.send("Invalid user");
+      response.json({ err: "Invalid user" });
     } else {
       let isPasswordCorrect = await bcrypt.compare(password, dbUser.password);
       if (isPasswordCorrect) {
@@ -108,7 +108,7 @@ app.post("/login", async (request, response) => {
         response.send({ name: dbUser.name, isStudent: dbUser.isStudent });
       } else {
         response.status(400);
-        response.send("Invalid password");
+        response.json({ err: "Invalid password" });
       }
     }
   } catch (e) {
